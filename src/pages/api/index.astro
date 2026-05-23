@@ -12,24 +12,39 @@ const endpoints: Array<{
 	path: string
 	description: string
 	example: string
+	response: string
+	note?: string
 }> = [
 	{
 		method: "GET",
 		path: "/api/v1/to/{text}",
 		description: "Översätt vanlig text till rövarspråket.",
 		example: `${base}/to/${encodeURIComponent("hej")}`,
+		response: `{
+  "text": "hej",
+  "robber": "hohejoj"
+}`,
 	},
 	{
 		method: "GET",
 		path: "/api/v1/from/{robber}",
 		description: "Översätt en rövarspråkssträng tillbaka till vanlig text.",
 		example: `${base}/from/${encodeURIComponent("hohejoj")}`,
+		response: `{
+  "robber": "hohejoj",
+  "text": "hej"
+}`,
+		note: 'Notera: eftersom "x" och "ks" båda kodas till samma rövarspråk-utdata ger avkodningen alltid tillbaka "ks". Det är en grundläggande egenskap hos rövarspråket, inte en bugg.',
 	},
 	{
 		method: "GET",
 		path: "/api/v1/validate/{robber}",
 		description: "Kolla om en sträng är giltigt rövarspråk.",
 		example: `${base}/validate/${encodeURIComponent("hohejoj")}`,
+		response: `{
+  "input": "hohejoj",
+  "valid": true
+}`,
 	},
 ]
 
@@ -84,7 +99,7 @@ Astro.response.headers.set(
 		>
 			Endpoints
 		</h2>
-		<section class="space-y-6">
+		<section class="space-y-8">
 			{
 				endpoints.map((endpoint) => (
 					<article class="parchment-card wanted-shadow px-6 py-6">
@@ -99,7 +114,7 @@ Astro.response.headers.set(
 						<p class="font-body text-bandit text-base leading-relaxed">
 							{endpoint.description}
 						</p>
-						<p class="font-hand text-bandit-soft mt-3 text-base">
+						<p class="font-hand text-bandit-soft mt-4 text-base">
 							Exempel:
 						</p>
 						<a
@@ -108,66 +123,20 @@ Astro.response.headers.set(
 						>
 							{endpoint.example}
 						</a>
+						<p class="font-hand text-bandit-soft mt-4 text-base">
+							Svar:
+						</p>
+						<pre class="font-mono text-bandit border-bandit-soft/30 bg-parchment/60 mt-1 overflow-x-auto rounded-sm border p-4 text-sm">
+							{endpoint.response}
+						</pre>
+						{endpoint.note && (
+							<p class="font-body text-bandit-soft mt-3 text-sm leading-relaxed">
+								{endpoint.note}
+							</p>
+						)}
 					</article>
 				))
 			}
-		</section>
-
-		<h2
-			class="font-display text-bandit mt-16 mb-6 text-center text-3xl"
-		>
-			Svar
-		</h2>
-		<section class="space-y-6">
-			<div class="parchment-card wanted-shadow px-6 py-6">
-				<p
-					class="font-body text-bandit mb-3 text-base leading-relaxed"
-				>
-					<code class="font-mono">/to/{`{text}`}</code> returnerar
-					originaltexten och rövarspråk-översättningen:
-				</p>
-				<pre
-					class="font-mono text-bandit border-bandit-soft/30 bg-parchment/60 overflow-x-auto rounded-sm border p-4 text-sm"
-				>{`{
-  "text": "hej",
-  "robber": "hohejoj"
-}`}</pre>
-			</div>
-			<div class="parchment-card wanted-shadow px-6 py-6">
-				<p
-					class="font-body text-bandit mb-3 text-base leading-relaxed"
-				>
-					<code class="font-mono">/from/{`{robber}`}</code> returnerar
-					rövarspråkssträngen och dess avkodning:
-				</p>
-				<pre
-					class="font-mono text-bandit border-bandit-soft/30 bg-parchment/60 overflow-x-auto rounded-sm border p-4 text-sm"
-				>{`{
-  "robber": "hohejoj",
-  "text": "hej"
-}`}</pre>
-				<p
-					class="font-body text-bandit-soft mt-4 text-sm leading-relaxed"
-				>
-					Notera: eftersom "x" och "ks" båda kodas till samma rövarspråk-utdata
-					ger avkodningen alltid tillbaka "ks". Det är en grundläggande egenskap
-					hos rövarspråket, inte en bugg.
-				</p>
-			</div>
-			<div class="parchment-card wanted-shadow px-6 py-6">
-				<p
-					class="font-body text-bandit mb-3 text-base leading-relaxed"
-				>
-					<code class="font-mono">/validate/{`{robber}`}</code> returnerar
-					indatan och om den är giltigt rövarspråk:
-				</p>
-				<pre
-					class="font-mono text-bandit border-bandit-soft/30 bg-parchment/60 overflow-x-auto rounded-sm border p-4 text-sm"
-				>{`{
-  "input": "hohejoj",
-  "valid": true
-}`}</pre>
-			</div>
 		</section>
 
 		<h2

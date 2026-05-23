@@ -24,8 +24,8 @@ export async function GET() {
 	<rect x="40" y="40" width="1120" height="550" fill="none" stroke="#3d2818" stroke-width="4" stroke-dasharray="14 8"/>
 	<rect x="58" y="58" width="1084" height="514" fill="none" stroke="#6b4a2e" stroke-width="1"/>
 
-	<!-- EFTERLYSES eyebrow -->
-	<text x="600" y="135" font-family="Georgia, 'Times New Roman', serif" font-size="36" font-style="italic" fill="#a8302a" text-anchor="middle" letter-spacing="6" font-weight="600">— Efterlyses —</text>
+	<!-- Eyebrow -->
+	<text x="600" y="135" font-family="Georgia, 'Times New Roman', serif" font-size="36" font-style="italic" fill="#a8302a" text-anchor="middle" letter-spacing="6" font-weight="600">— Kodknäckare sökes —</text>
 
 	<!-- Main title -->
 	<text x="600" y="280" font-family="Georgia, 'Times New Roman', serif" font-size="120" font-weight="900" fill="#3d2818" text-anchor="middle" letter-spacing="6">RÖVARSPRÅKET</text>
