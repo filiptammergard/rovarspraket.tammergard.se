@@ -79,6 +79,11 @@ Astro.response.headers.set(
 			</div>
 		</section>
 
+		<h2
+			class="font-display text-bandit mt-12 mb-6 text-center text-3xl"
+		>
+			Endpoints
+		</h2>
 		<section class="space-y-6">
 			{
 				endpoints.map((endpoint) => (
@@ -108,6 +113,94 @@ Astro.response.headers.set(
 			}
 		</section>
 
+		<h2
+			class="font-display text-bandit mt-16 mb-6 text-center text-3xl"
+		>
+			Svar
+		</h2>
+		<section class="space-y-6">
+			<div class="parchment-card wanted-shadow px-6 py-6">
+				<p
+					class="font-body text-bandit mb-3 text-base leading-relaxed"
+				>
+					<code class="font-mono">/to/{`{text}`}</code> returnerar
+					originaltexten och rövarspråk-översättningen:
+				</p>
+				<pre
+					class="font-mono text-bandit border-bandit-soft/30 bg-parchment/60 overflow-x-auto rounded-sm border p-4 text-sm"
+				>{`{
+  "text": "hej",
+  "robber": "hohejoj"
+}`}</pre>
+			</div>
+			<div class="parchment-card wanted-shadow px-6 py-6">
+				<p
+					class="font-body text-bandit mb-3 text-base leading-relaxed"
+				>
+					<code class="font-mono">/from/{`{robber}`}</code> returnerar
+					rövarspråkssträngen och dess avkodning:
+				</p>
+				<pre
+					class="font-mono text-bandit border-bandit-soft/30 bg-parchment/60 overflow-x-auto rounded-sm border p-4 text-sm"
+				>{`{
+  "robber": "hohejoj",
+  "text": "hej"
+}`}</pre>
+				<p
+					class="font-body text-bandit-soft mt-4 text-sm leading-relaxed"
+				>
+					Notera: eftersom "x" och "ks" båda kodas till samma rövarspråk-utdata
+					ger avkodningen alltid tillbaka "ks". Det är en grundläggande egenskap
+					hos rövarspråket, inte en bugg.
+				</p>
+			</div>
+			<div class="parchment-card wanted-shadow px-6 py-6">
+				<p
+					class="font-body text-bandit mb-3 text-base leading-relaxed"
+				>
+					<code class="font-mono">/validate/{`{robber}`}</code> returnerar
+					indatan och om den är giltigt rövarspråk:
+				</p>
+				<pre
+					class="font-mono text-bandit border-bandit-soft/30 bg-parchment/60 overflow-x-auto rounded-sm border p-4 text-sm"
+				>{`{
+  "input": "hohejoj",
+  "valid": true
+}`}</pre>
+			</div>
+		</section>
+
+		<h2
+			class="font-display text-bandit mt-16 mb-6 text-center text-3xl"
+		>
+			Fel
+		</h2>
+		<section class="parchment-card wanted-shadow px-6 py-6">
+			<p class="font-body text-bandit text-base leading-relaxed">
+				Fel returneras som JSON. Statuskoder:
+			</p>
+			<ul
+				class="font-body text-bandit mt-3 list-disc space-y-1 pl-6 text-base leading-relaxed"
+			>
+				<li>
+					<code class="font-mono">400</code> – parameter saknas (tom sträng).
+				</li>
+				<li>
+					<code class="font-mono">422</code> – välformad indata men ogiltig
+					(<code class="font-mono">/from</code> med en sträng som inte är
+					rövarspråk).
+				</li>
+			</ul>
+			<pre
+				class="font-mono text-bandit border-bandit-soft/30 bg-parchment/60 mt-4 overflow-x-auto rounded-sm border p-4 text-sm"
+			>{`{
+  "error": {
+    "status": 422,
+    "message": "\\"bod\\" är inte en giltig rövarspråkssträng."
+  }
+}`}</pre>
+		</section>
+
 		<section class="mt-16">
 			<div class="parchment-card mx-auto max-w-2xl px-6 py-6">
 				<h2
@@ -132,10 +225,10 @@ Astro.response.headers.set(
 				>
 					Bakgrunden finns att läsa i blogginlägget{" "}
 					<a
-						href="https://tammergard.se/blog/robber-language-generator"
+						href="https://tammergard.se/sv/blog/robber-language-generator"
 						class="text-rovare-red hover:text-rovare-red-deep underline-offset-4 hover:underline"
 					>
-						Robber language generator
+						Rövarspråksgenerator
 					</a>
 					.
 				</p>
