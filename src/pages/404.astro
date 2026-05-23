@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro"
+
+const title = "404 · Rövarspråket"
+const description = "Sidan kunde inte hittas."
+---
+
+<Layout title={title} description={description}>
+	<main class="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6 py-16 text-center">
+		<p class="font-hand text-rovare-red text-3xl md:text-4xl">
+			Hohuppopsos!
+		</p>
+		<h1
+			class="font-display text-bandit mt-4 text-6xl md:text-8xl"
+		>
+			404
+		</h1>
+		<p class="font-body text-bandit-soft mt-4 text-lg">
+			Den här sidan har gömt sig i skogen någonstans.
+		</p>
+		<a
+			href="/"
+			class="bg-rovare-red hover:bg-rovare-red-deep wiggle-on-hover font-display mt-8 inline-block rounded-sm px-8 py-3 text-base text-parchment uppercase tracking-wider transition"
+		>
+			Tillbaka till start
+		</a>
+	</main>
+</Layout>

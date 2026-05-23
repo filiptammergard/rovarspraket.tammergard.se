@@ -1,0 +1,242 @@
+---
+import Layout from "../layouts/Layout.astro"
+import { safeFromRobber, safeToRobber, isRobber } from "../lib/robber"
+
+const params = Astro.url.searchParams
+const query = (params.get("q") ?? "").trim()
+
+type QueryResult =
+	| { direction: "to"; input: string; output: string }
+	| { direction: "from"; input: string; output: string }
+	| { error: string; input: string }
+
+let result: QueryResult | null = null
+if (query) {
+	if (isRobber(query) && query.length > 0) {
+		const decoded = safeFromRobber(query)
+		if (decoded === null) {
+			result = { error: "Det där känns inte som rövarspråk.", input: query }
+		} else {
+			result = { direction: "from", input: query, output: decoded }
+		}
+	} else {
+		const encoded = safeToRobber(query)
+		if (encoded === null) {
+			result = { error: "Något gick snett.", input: query }
+		} else {
+			result = { direction: "to", input: query, output: encoded }
+		}
+	}
+}
+
+const examples = [
+	{ text: "hej", robber: "hohejoj" },
+	{ text: "rövare", robber: "rorövovarore" },
+	{ text: "Astrid", robber: "Asostotroridod" },
+	{ text: "hemlig kod", robber: "hohemomloligog kokodod" },
+]
+
+const title = result
+	? "error" in result
+		? "Rövarspråket"
+		: `${result.input} → ${result.output} · Rövarspråket`
+	: "Rövarspråket"
+
+const description =
+	"Översätt till och från rövarspråket – med API och allt. Lekfull tjuvspråksgenerator av Filip Tammergård."
+
+Astro.response.headers.set(
+	"Cache-Control",
+	"public, s-maxage=3600, stale-while-revalidate=86400",
+)
+---
+
+<Layout title={title} description={description}>
+	<main class="mx-auto max-w-3xl px-6 py-12 md:py-20">
+		<!-- WANTED-aktig header -->
+		<header class="mb-14 text-center">
+			<div
+				class="parchment-card wanted-shadow rovare-rotate-left mx-auto inline-block px-10 py-8"
+			>
+				<p
+					class="font-hand text-rovare-red mb-2 text-3xl md:text-4xl"
+				>
+					Efterlyses
+				</p>
+				<h1
+					class="font-display text-bandit text-5xl tracking-wide md:text-7xl"
+				>
+					Rövarspråket
+				</h1>
+				<p
+					class="text-bandit-soft font-hand mt-3 text-xl md:text-2xl"
+				>
+					&mdash; en mycket misstänkt kodknäckare &mdash;
+				</p>
+			</div>
+		</header>
+
+		<!-- Översättare -->
+		<section class="mb-16">
+			<form method="get" action="/" class="mx-auto max-w-2xl">
+				<label
+					for="q"
+					class="font-hand text-bandit-soft mb-2 block text-center text-2xl"
+				>
+					Viska något i rutan…
+				</label>
+				<div
+					class="parchment-card wanted-shadow flex flex-col gap-2 px-4 py-3 md:flex-row md:items-center md:gap-3"
+				>
+					<input
+						id="q"
+						name="q"
+						type="text"
+						value={query}
+						placeholder="Skriv vad du vill översätta"
+						autocomplete="off"
+						spellcheck="false"
+						class="text-bandit placeholder:text-bandit-soft/60 flex-1 bg-transparent px-3 py-2 text-xl outline-none md:text-2xl"
+					/>
+					<button
+						type="submit"
+						class="bg-rovare-red wiggle-on-hover hover:bg-rovare-red-deep font-display rounded-sm px-6 py-3 text-base text-parchment uppercase tracking-wider transition"
+					>
+						Översätt
+					</button>
+				</div>
+				<p
+					class="font-hand text-bandit-soft mt-2 text-center text-base opacity-70"
+				>
+					(Vi listar ut själva åt vilket håll det ska översättas.)
+				</p>
+			</form>
+
+			{
+				result && (
+					<div class="mx-auto mt-10 max-w-2xl text-center">
+						{"error" in result ? (
+							<p class="font-hand text-rovare-red text-2xl">
+								{result.error}
+							</p>
+						) : (
+							<div class="parchment-card rovare-rotate-right wanted-shadow inline-block px-10 py-8">
+								<p class="font-hand text-bandit-soft mb-3 text-lg uppercase tracking-widest">
+									{result.direction === "to"
+										? "På rövarspråket"
+										: "Översatt till vanlig svenska"}
+								</p>
+								<p class="font-display text-bandit break-words text-3xl md:text-5xl">
+									{result.output}
+								</p>
+							</div>
+						)}
+					</div>
+				)
+			}
+		</section>
+
+		<!-- Exempel -->
+		<section class="mb-16">
+			<div class="dashed-rule mx-auto mb-8 h-1 max-w-md"></div>
+			<h2
+				class="font-display text-bandit mb-6 text-center text-2xl md:text-3xl"
+			>
+				Provexempel
+			</h2>
+			<ul class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+				{
+					examples.map((example) => (
+						<li>
+							<a
+								href={`/?q=${encodeURIComponent(example.text)}`}
+								class="parchment-card hover:wiggle-on-hover block px-5 py-4 transition hover:scale-[1.02]"
+							>
+								<p class="font-body text-bandit-soft text-sm">
+									{example.text}
+								</p>
+								<p class="font-hand text-rovare-red text-2xl">
+									→ {example.robber}
+								</p>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+
+		<!-- Vad är rövarspråket? -->
+		<section class="mb-16">
+			<div class="dashed-rule mx-auto mb-8 h-1 max-w-md"></div>
+			<div class="parchment-card mx-auto max-w-2xl px-8 py-7">
+				<h2
+					class="font-display text-bandit mb-4 text-center text-2xl md:text-3xl"
+				>
+					Vad är rövarspråket?
+				</h2>
+				<p class="font-body text-bandit text-lg leading-relaxed">
+					Rövarspråket är ett svenskt lekspråk som blev känt genom Astrid
+					Lindgrens böcker om Kalle Blomkvist. Regeln är att man efter
+					varje konsonant lägger till bokstaven "o" och samma konsonant
+					igen, så att "hej" blir "hohejoj". Bokstaven x är ett
+					specialfall: eftersom det uttalas "ks" blir det "koksos".
+				</p>
+				<p
+					class="font-body text-bandit-soft mt-4 text-center text-base"
+				>
+					Läs mer i blogginlägget{" "}
+					<a
+						href="https://tammergard.se/blog/robber-language-generator"
+						class="text-rovare-red hover:text-rovare-red-deep underline-offset-4 hover:underline"
+					>
+						Robber language generator
+					</a>
+					.
+				</p>
+			</div>
+		</section>
+
+		<!-- API teaser -->
+		<section class="mb-12">
+			<div class="dashed-rule mx-auto mb-8 h-1 max-w-md"></div>
+			<div class="text-center">
+				<p class="font-hand text-bandit-soft mb-3 text-2xl">
+					Vill du bygga något kul med det här?
+				</p>
+				<a
+					href="/api"
+					class="font-display bg-bandit hover:bg-bandit-soft inline-block rounded-sm px-8 py-3 text-base text-parchment uppercase tracking-wider transition"
+				>
+					Till API:t
+				</a>
+			</div>
+		</section>
+
+		<footer class="text-center">
+			<p
+				class="font-hand text-bandit-soft mt-12 text-base opacity-80"
+			>
+				<a
+					href="https://www.npmjs.com/package/@tammergard/robber"
+					class="text-rovare-red hover:text-rovare-red-deep underline-offset-4 hover:underline"
+				>
+					@tammergard/robber
+				</a>
+				<span class="mx-2" aria-hidden="true">·</span>
+				<a
+					href="https://github.com/filiptammergard/robber"
+					class="text-rovare-red hover:text-rovare-red-deep underline-offset-4 hover:underline"
+				>
+					GitHub
+				</a>
+				<span class="mx-2" aria-hidden="true">·</span>
+				<a
+					href="https://tammergard.se"
+					class="text-rovare-red hover:text-rovare-red-deep underline-offset-4 hover:underline"
+				>
+					tammergard.se
+				</a>
+			</p>
+		</footer>
+	</main>
+</Layout>
