@@ -1,51 +1,54 @@
 @import "tailwindcss";
 
+:root {
+	--c-bg: #f5ecd7;
+	--c-bg-deep: #ebdfc1;
+	--c-fg: #3d2818;
+	--c-fg-muted: #6b4a2e;
+	--c-border: #6b4a2e;
+	--c-rovare-red: #a8302a;
+	--c-rovare-red-deep: #7a1f1a;
+	--c-honey: #d4a017;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--c-bg: #1a120c;
+		--c-bg-deep: #2a1d12;
+		--c-fg: #f1e4c2;
+		--c-fg-muted: #c9b78a;
+		--c-border: #8a6940;
+		--c-rovare-red: #d9544c;
+		--c-rovare-red-deep: #b03832;
+		--c-honey: #e6b836;
+	}
+}
+
 @theme {
-	--color-parchment: #f5ecd7;
-	--color-parchment-deep: #ebdfc1;
-	--color-bandit: #3d2818;
-	--color-bandit-soft: #6b4a2e;
-	--color-rovare-red: #a8302a;
-	--color-rovare-red-deep: #7a1f1a;
-	--color-forest: #3d5a37;
-	--color-forest-deep: #2a3f26;
-	--color-honey: #d4a017;
-	--color-paper-shadow: rgba(61, 40, 24, 0.08);
+	--color-parchment: var(--c-bg);
+	--color-parchment-deep: var(--c-bg-deep);
+	--color-bandit: var(--c-fg);
+	--color-bandit-soft: var(--c-fg-muted);
+	--color-rovare-red: var(--c-rovare-red);
+	--color-rovare-red-deep: var(--c-rovare-red-deep);
+	--color-honey: var(--c-honey);
 }
 
 html {
-	background-color: var(--color-parchment);
-	color: var(--color-bandit);
+	background-color: var(--c-bg);
+	color: var(--c-fg);
 	background-image:
 		radial-gradient(
 			ellipse at top,
-			rgba(212, 160, 23, 0.08),
+			color-mix(in srgb, var(--c-honey) 12%, transparent),
 			transparent 70%
 		),
 		radial-gradient(
 			ellipse at bottom,
-			rgba(168, 48, 42, 0.05),
+			color-mix(in srgb, var(--c-rovare-red) 8%, transparent),
 			transparent 70%
 		);
 	background-attachment: fixed;
-}
-
-@media (prefers-color-scheme: dark) {
-	html {
-		background-color: #1a120c;
-		color: #ebdfc1;
-		background-image:
-			radial-gradient(
-				ellipse at top,
-				rgba(212, 160, 23, 0.06),
-				transparent 70%
-			),
-			radial-gradient(
-				ellipse at bottom,
-				rgba(168, 48, 42, 0.06),
-				transparent 70%
-			);
-	}
 }
 
 .font-display {
@@ -70,38 +73,31 @@ html {
 
 .wanted-shadow {
 	box-shadow:
-		0 1px 0 rgba(61, 40, 24, 0.1),
-		0 2px 8px rgba(61, 40, 24, 0.12),
-		0 14px 24px rgba(61, 40, 24, 0.18);
+		0 1px 0 color-mix(in srgb, var(--c-fg) 10%, transparent),
+		0 2px 8px color-mix(in srgb, var(--c-fg) 12%, transparent),
+		0 14px 24px color-mix(in srgb, var(--c-fg) 18%, transparent);
 }
 
 .parchment-card {
-	background-color: var(--color-parchment-deep);
+	background-color: var(--c-bg-deep);
 	background-image:
 		radial-gradient(
 			circle at 20% 20%,
-			rgba(168, 48, 42, 0.03),
+			color-mix(in srgb, var(--c-rovare-red) 4%, transparent),
 			transparent 40%
 		),
 		radial-gradient(
 			circle at 80% 80%,
-			rgba(61, 90, 55, 0.04),
+			color-mix(in srgb, var(--c-honey) 6%, transparent),
 			transparent 40%
 		);
-	border: 2px solid var(--color-bandit-soft);
-}
-
-@media (prefers-color-scheme: dark) {
-	.parchment-card {
-		background-color: #2a1d12;
-		border-color: #6b4a2e;
-	}
+	border: 2px solid var(--c-border);
 }
 
 .dashed-rule {
 	background-image: linear-gradient(
 		to right,
-		var(--color-bandit-soft) 50%,
+		var(--c-border) 50%,
 		transparent 50%
 	);
 	background-size: 16px 2px;

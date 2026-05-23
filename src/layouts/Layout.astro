@@ -9,6 +9,7 @@ interface Props {
 
 const { title, description } = Astro.props
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url)
+const ogImage = new URL("/og.svg", Astro.site ?? Astro.url)
 ---
 
 <!doctype html>
@@ -48,9 +49,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url)
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
-		<meta name="twitter:card" content="summary" />
+		<meta property="og:image" content={ogImage} />
+		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
 		<ClientRouter />
 	</head>
 	<body class="font-body">
