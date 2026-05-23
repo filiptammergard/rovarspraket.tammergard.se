@@ -52,24 +52,24 @@ Astro.response.headers.set(
 ---
 
 <Layout title={title} description={description}>
-	<main class="mx-auto max-w-3xl px-6 py-12 md:py-20">
+	<main class="mx-auto max-w-3xl px-4 py-10 sm:px-6 md:py-20">
 		<!-- WANTED-aktig header -->
-		<header class="mb-14 text-center">
+		<header class="mb-12 text-center md:mb-14">
 			<div
-				class="parchment-card wanted-shadow rovare-rotate-left mx-auto inline-block px-10 py-8"
+				class="parchment-card wanted-shadow rovare-rotate-left mx-auto inline-block max-w-full px-6 py-6 sm:px-10 sm:py-8"
 			>
 				<p
-					class="font-hand text-rovare-red mb-2 text-3xl md:text-4xl"
+					class="font-hand text-rovare-red mb-2 text-2xl sm:text-3xl md:text-4xl"
 				>
 					Kodknäckare sökes
 				</p>
 				<h1
-					class="font-display text-bandit text-5xl tracking-wide md:text-7xl"
+					class="font-display text-bandit text-4xl tracking-wide sm:text-5xl md:text-7xl"
 				>
 					Rövarspråket
 				</h1>
 				<p
-					class="text-bandit-soft font-hand mt-3 text-xl md:text-2xl"
+					class="text-bandit-soft font-hand mt-3 text-lg sm:text-xl md:text-2xl"
 				>
 					&mdash; ett gammalt lekspråk som vill översättas &mdash;
 				</p>
@@ -120,13 +120,13 @@ Astro.response.headers.set(
 								{result.error}
 							</p>
 						) : (
-							<div class="parchment-card rovare-rotate-right wanted-shadow inline-block px-10 py-8">
-								<p class="font-hand text-bandit-soft mb-3 text-lg uppercase tracking-widest">
+							<div class="parchment-card rovare-rotate-right wanted-shadow inline-block max-w-full px-6 py-6 sm:px-10 sm:py-8">
+								<p class="font-hand text-bandit-soft mb-3 text-base uppercase tracking-widest sm:text-lg">
 									{result.direction === "to"
 										? "På rövarspråket"
 										: "Översatt till vanlig svenska"}
 								</p>
-								<p class="font-display text-bandit break-words text-3xl md:text-5xl">
+								<p class="font-display text-bandit text-2xl break-all sm:text-3xl md:text-5xl">
 									{result.output}
 								</p>
 							</div>
@@ -155,7 +155,7 @@ Astro.response.headers.set(
 								<p class="font-body text-bandit-soft text-sm">
 									{example.text}
 								</p>
-								<p class="font-hand text-rovare-red text-2xl">
+								<p class="font-hand text-rovare-red text-2xl break-all">
 									→ {example.robber}
 								</p>
 							</a>
@@ -168,7 +168,7 @@ Astro.response.headers.set(
 		<!-- Vad är rövarspråket? -->
 		<section class="mb-16">
 			<div class="dashed-rule mx-auto mb-8 h-1 max-w-md"></div>
-			<div class="parchment-card mx-auto max-w-2xl px-8 py-7">
+			<div class="parchment-card mx-auto max-w-2xl px-6 py-6 sm:px-8 sm:py-7">
 				<h2
 					class="font-display text-bandit mb-4 text-center text-2xl md:text-3xl"
 				>
@@ -214,7 +214,7 @@ Astro.response.headers.set(
 
 		<footer class="text-center">
 			<p
-				class="font-hand text-bandit-soft mt-12 text-base opacity-80"
+				class="font-hand text-bandit-soft mt-12 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-base opacity-80"
 			>
 				<a
 					href="https://www.npmjs.com/package/@tammergard/robber"
@@ -222,14 +222,14 @@ Astro.response.headers.set(
 				>
 					@tammergard/robber
 				</a>
-				<span class="mx-2" aria-hidden="true">·</span>
+				<span aria-hidden="true">·</span>
 				<a
 					href="https://github.com/filiptammergard/robber"
 					class="text-rovare-red hover:text-rovare-red-deep underline-offset-4 hover:underline"
 				>
 					GitHub
 				</a>
-				<span class="mx-2" aria-hidden="true">·</span>
+				<span aria-hidden="true">·</span>
 				<a
 					href="https://tammergard.se"
 					class="text-rovare-red hover:text-rovare-red-deep underline-offset-4 hover:underline"

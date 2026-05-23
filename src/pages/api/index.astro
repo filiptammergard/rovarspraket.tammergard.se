@@ -55,7 +55,7 @@ Astro.response.headers.set(
 ---
 
 <Layout title={title} description={description}>
-	<main class="mx-auto max-w-3xl px-6 py-16">
+	<main class="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
 		<p class="text-center">
 			<a
 				href="/"
@@ -80,7 +80,7 @@ Astro.response.headers.set(
 		</header>
 
 		<section class="mb-12">
-			<div class="parchment-card wanted-shadow px-6 py-6">
+			<div class="parchment-card wanted-shadow px-4 py-5 sm:px-6 sm:py-6">
 				<h2
 					class="font-display text-bandit mb-4 text-2xl"
 				>
@@ -102,7 +102,7 @@ Astro.response.headers.set(
 		<section class="space-y-8">
 			{
 				endpoints.map((endpoint) => (
-					<article class="parchment-card wanted-shadow px-6 py-6">
+					<article class="parchment-card wanted-shadow px-4 py-5 sm:px-6 sm:py-6">
 						<div class="mb-3 flex flex-wrap items-baseline gap-3">
 							<span class="font-display bg-bandit rounded-sm px-3 py-1 text-xs text-parchment tracking-wider">
 								{endpoint.method}
@@ -144,7 +144,7 @@ Astro.response.headers.set(
 		>
 			Fel
 		</h2>
-		<section class="parchment-card wanted-shadow px-6 py-6">
+		<section class="parchment-card wanted-shadow px-4 py-5 sm:px-6 sm:py-6">
 			<p class="font-body text-bandit text-base leading-relaxed">
 				Fel returneras som JSON. Statuskoder:
 			</p>
@@ -205,14 +205,14 @@ Astro.response.headers.set(
 		</section>
 
 		<footer class="mt-16 text-center">
-			<p class="font-hand text-bandit-soft text-base opacity-80">
+			<p class="font-hand text-bandit-soft flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-base opacity-80">
 				<a
 					href="https://github.com/filiptammergard/robber"
 					class="text-rovare-red hover:text-rovare-red-deep underline-offset-4 hover:underline"
 				>
 					GitHub
 				</a>
-				<span class="mx-2" aria-hidden="true">·</span>
+				<span aria-hidden="true">·</span>
 				<a
 					href="https://tammergard.se"
 					class="text-rovare-red hover:text-rovare-red-deep underline-offset-4 hover:underline"
