@@ -3,6 +3,4 @@ allowBuilds:
   sharp: true
 
 minimumReleaseAgeExclude:
-  - "@tammergard/tsconfig@3.0.2"
-  - "@tammergard/prettier-config@3.0.2"
-  - "@tammergard/robber@1.0.1"
+  - "@tammergard/*"
