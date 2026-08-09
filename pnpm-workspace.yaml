@@ -1,3 +1,8 @@
+overrides:
+  # @vercel/routing-utils pins the vulnerable 6.1.0 alongside an aliased 6.3.0.
+  # GHSA-9wv6-86v2-598j
+  path-to-regexp@6.1.0: 6.3.0
+
 allowBuilds:
   esbuild: true
   sharp: true
