@@ -18,8 +18,8 @@ importers:
         specifier: ^4.3.3
         version: 4.3.3(vite@8.2.1(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.0))
       '@tammergard/robber':
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^1.0.2
+        version: 1.0.2
       astro:
         specifier: ^7.2.2
         version: 7.2.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@vercel/functions@3.9.1)(jiti@2.7.0)(yaml@2.9.0)
@@ -1174,9 +1174,8 @@ packages:
     peerDependencies:
       prettier: '>=3.0.0'
 
-  '@tammergard/robber@1.0.1':
-    resolution: {integrity: sha512-gFgiP44R+T4YmeHQI+gTD2mFbZ1X0pu6f0PpNMbOHd5kGlRO2Ou8Y6Vqb67qI5QG/h9qNI46a6I60ST7RBEiJQ==}
-    engines: {node: '>=24'}
+  '@tammergard/robber@1.0.2':
+    resolution: {integrity: sha512-UEMKIn7M3LX1Nz+hOz7oZ1FhAZp/8scbk5cyEFuKvyuRFoQ2rGK/lqg6cQ+DxKa/zNncU4zXDbd5oEB1Vfgd4w==}
 
   '@tammergard/tsconfig@3.0.2':
     resolution: {integrity: sha512-bsuEvQdDqikQXFDI8sss2jtJcVOU4UIkTSGSWMFEI2nhutsOW78Mw5fXciblM0G4zzSpCzF8Y5BAsaO6njwLpA==}
@@ -3497,7 +3496,7 @@ snapshots:
     dependencies:
       prettier: 3.9.6
 
-  '@tammergard/robber@1.0.1': {}
+  '@tammergard/robber@1.0.2': {}
 
   '@tammergard/tsconfig@3.0.2(typescript@6.0.3)':
     dependencies:
