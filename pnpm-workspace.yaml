@@ -14,6 +14,14 @@ overrides:
   # stable 1.x. Can be removed when emnapi 2.0 is stable.
   "@emnapi/runtime@>=2.0.0-0": "^1.7.1"
   "@emnapi/core@>=2.0.0-0": "^1.7.1"
+  # @vercel/nft (even the latest 1.11.1) declares glob ^13, and
+  # GHSA-3g3m-2fjr-6pw4 flags all of 13.x (13.0.7 backports the fix but is
+  # still in the advisory's range; first patched is 14.0.2). nft only
+  # calls `glob(pattern, { mark, ignore, dot, nodir })`, which 14 keeps,
+  # CommonJS build included; 14 also brings minimatch 11, which fixes
+  # GHSA-g3hv-75wg-m249. Verified with an identical .vercel/output file list.
+  # Can be removed when @vercel/nft moves to glob ^14.
+  "glob@>=9.0.0 <14.0.2": "^14.0.2"
 
 allowBuilds:
   esbuild: true
