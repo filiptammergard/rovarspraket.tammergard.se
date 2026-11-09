@@ -8,6 +8,12 @@ overrides:
   # 4.1.11, even in the latest 0.3.5. GHSA-mrhx-c7xc-m3w5, fixed in 4.6.6.
   # Can be removed when @vercel/cli-config drops the exact pin.
   "zod@>=4.0.0 <4.6.6": "^4.6.6"
+  # @napi-rs/wasm-runtime (via @astrojs/check > @astrojs/astro2tsx) resolves
+  # @emnapi/runtime to 2.0.0-beta.2 next to @emnapi/core 1.x, which crashes
+  # `astro check` ("this.bridge.setLastError is not a function"). Keep both on
+  # stable 1.x. Can be removed when emnapi 2.0 is stable.
+  "@emnapi/runtime@>=2.0.0-0": "^1.7.1"
+  "@emnapi/core@>=2.0.0-0": "^1.7.1"
 
 allowBuilds:
   esbuild: true
